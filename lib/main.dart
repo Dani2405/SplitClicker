@@ -9,6 +9,7 @@ void main() {
       title: 'Splitter Clicker',
       home: Menu(),
       routes: {
+        '/menu': (context) => Menu(),
         '/play': (context) => Game(),
       },
     ),
