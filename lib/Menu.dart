@@ -12,16 +12,16 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF181a1e),
-      appBar: AppBar(
-        title: Text("Splitter Clicker", style: TextStyle(fontSize: 24)),
-        backgroundColor: Color(0xFF2a2d33),
-      ),
-      body: Center(
-        child: MaterialButton(
-          child: Text("Play", style: TextStyle(color: Colors.white, fontSize: 34),),
-          onPressed: () {Navigator.pushReplacementNamed(context, "/play");},
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: GestureDetector(
+          child: MaterialButton(
+            child: Text("Play", style: TextStyle(color: Colors.white, fontSize: 56),),
+            onPressed: () {Navigator.pushReplacementNamed(context, "/play");},
+          ),
         ),
-      ),
+      )
     );
   }
 

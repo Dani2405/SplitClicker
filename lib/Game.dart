@@ -15,6 +15,7 @@ class _GameState extends State<Game> {
   int _redCounter = 0;
   int _blueCounter = 0;
   bool _gameOver = false;
+  int increment = 15;
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +27,11 @@ class _GameState extends State<Game> {
             barrierDismissible: false,
             context: context,
             builder: (context) => new AlertDialog(
-                  title: Text('Game Over!'),
+                  backgroundColor: Color(0xFF181a1e),
+                  title: Text('Game Over!', style: TextStyle(color: Colors.white)),
                   content: _redCounter < -175
-                      ? Text('Player 1 Won!')
-                      : Text('Player 2 Won!'),
+                      ? Text('Player 1 Won!', style: TextStyle(color: Colors.white))
+                      : Text('Player 2 Won!', style: TextStyle(color: Colors.white)),
                   actions: <Widget>[
                     new GestureDetector(
                       child: MaterialButton(
@@ -41,17 +43,18 @@ class _GameState extends State<Game> {
                                     builder: (BuildContext context) => super.widget));
                           },
                           child: Text(
-                            "Replay?",
-                            style: TextStyle(color: Colors.black),
+                            "Replay",
+                            style: TextStyle(color: Colors.white),
                           )),
-                    ),new GestureDetector(
+                    ),
+                    new GestureDetector(
                       child: MaterialButton(
                           onPressed: () {
                             Navigator.pushReplacementNamed(context, "/menu");
                           },
                           child: Text(
                             "Exit",
-                            style: TextStyle(color: Colors.black),
+                            style: TextStyle(color: Colors.white),
                           )),
                     ),
                   ],
@@ -62,8 +65,8 @@ class _GameState extends State<Game> {
     void _incrementRed() {
       setState(() {
         if (!_gameOver) {
-          _redCounter += 25;
-          _blueCounter -= 25;
+          _redCounter += increment;
+          _blueCounter -= increment;
           print('$_redCounter vs $_blueCounter');
           _checkGameOver();
         }
@@ -74,8 +77,8 @@ class _GameState extends State<Game> {
       setState(() {
         {
           if (!_gameOver) {
-            _blueCounter += 25;
-            _redCounter -= 25;
+            _blueCounter += increment;
+            _redCounter -= increment;
             print('$_blueCounter vs $_redCounter');
             _checkGameOver();
           }
@@ -97,7 +100,8 @@ class _GameState extends State<Game> {
                 child: GestureDetector(
                     onTap: _incrementRed,
                     child: Container(
-                      color: Colors.red,
+                      //color: Colors.red,
+                      color: Color(0xFFff5a4f),
                       child: Center(
                           child: RotatedBox(
                               quarterTurns: 2,
@@ -123,20 +127,30 @@ class _GameState extends State<Game> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: onBackPressed,
-        tooltip: 'Go back',
-        child: Icon(Icons.arrow_back),
-      ),
+      floatingActionButton: SizedBox(
+        width: 50,
+        height: MediaQuery.of(context).size.height-30,
+        child: Center(
+          child: FloatingActionButton(
+            mini: true,
+            backgroundColor: Colors.white,
+            onPressed: onBackPressed,
+            tooltip: 'Pause',
+            child: Icon(Icons.pause, color: Colors.black,),
+          ),
+        ),
+      )
     );
   }
 
   Future<bool> onBackPressed() {
     return showDialog(
+          barrierDismissible: false,
           context: context,
           builder: (context) => new AlertDialog(
-            title: new Text('Game over?'),
-            content: new Text('This action will end the game, are you sure?'),
+            backgroundColor: Color(0xFF181a1e),
+            title: new Text('Paused', style: TextStyle(color: Colors.white)),
+            content: new Text('Do you want to end the game?', style: TextStyle(color: Colors.white)),
             actions: <Widget>[
               new GestureDetector(
                 child: MaterialButton(
@@ -146,7 +160,7 @@ class _GameState extends State<Game> {
                     },
                     child: Text(
                       "NO",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.white),
                     )),
               ),
               new GestureDetector(
@@ -156,7 +170,7 @@ class _GameState extends State<Game> {
                     },
                     child: Text(
                       "YES",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.white),
                     )),
               ),
             ],
