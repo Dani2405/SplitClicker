@@ -17,12 +17,16 @@ class _MenuState extends State<Menu> {
         height: MediaQuery.of(context).size.height,
         child: GestureDetector(
           child: MaterialButton(
-            child: Text("Play", style: TextStyle(color: Colors.white, fontSize: 56),),
+            highlightColor: Colors.blue,
+            splashColor: Colors.black,
+            child: Text(
+              "Play",
+              style: TextStyle(color: Colors.white, fontSize: 56),
+            ),
             onPressed: () {Navigator.pushReplacementNamed(context, "/play");},
           ),
         ),
-      )
+      ),
     );
   }
-
 }
